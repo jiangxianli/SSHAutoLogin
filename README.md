@@ -17,7 +17,7 @@
 )
 ```
 
-##使用
+## 使用
 1).给ssh_login文件执行的权限,并执行ssh_login
 ```shell
   chmod u+x ssh_login
@@ -29,7 +29,7 @@
   cp ssh_login /usr/local/
   ssh_login
 ```
-##提示
+## 提示
 使用本脚本前，请确认已安装expect
 
 1) Linux 下 安装expect
@@ -41,7 +41,7 @@
  brew install homebrew/dupes/expect
 ```
 
-##特殊说明
+## 特殊说明
 如果密码中含有以下特殊字符，请按照一下规则转义：
 - \ 需转义为 \\\\\
 - } 需转义为 \\}

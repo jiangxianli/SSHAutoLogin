@@ -55,9 +55,9 @@ function AutoLogin(){
     expect -c "
         spawn ssh -p ${CONFIG[1]} ${CONFIG[3]}@${CONFIG[2]}
         expect {
-            \"*assword\" {set timeout 6000; send \"${CONFIG[4]}\n\";}
+            \"*assword\" {set timeout 6000; send \"${CONFIG[4]}\n\"; exp_continue ; sleep 3; }
             \"yes/no\" {send \"yes\n\"; exp_continue;}
-            \"Last*\" {  send_user \"成功登录【${CONFIG[0]}】\";}
+            \"Last*\" {  send_user \"\n成功登录【${CONFIG[0]}】\n\";}
         }
        
    interact"
