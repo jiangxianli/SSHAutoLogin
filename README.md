@@ -33,6 +33,13 @@
   cp ssh_login /usr/local/
   ssh_login
 ```
+3).命令使用
+
+`ssh_login list` - 查看所有服务器配置
+
+`ssh_login 1` - 登录第一个配置的服务器
+
+
 ## 提示
 使用本脚本前，请确认已安装expect
 
@@ -58,8 +65,3 @@
 如密码为'-OU[]98' 在CONFIG配置中写成'-OU\[]98'
 否则，提示要手动输入密码
 ```
-
-## 使用
-`ssh_login list` - 查看所有服务器配置
-
-`ssh_login 1` - 登录第一个配置的服务器
