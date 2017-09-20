@@ -5,20 +5,20 @@
 在ssh_login文件中，修改以下配置
 ```shell
     CONFIGS=(
-    "服务器名称 端口号 IP地址 登录用户名 登录密码"
+    "服务器名称 端口号 IP地址 登录用户名 登录密码/秘钥文件Key 秘钥文件地址"
     "服务器名称 端口号 IP地址 登录用户名 登录密码"
 )
 ```
 比如可以修改成：
 ```shell
     CONFIGS=(
-    "服务器名称 22 220.181.57.217 root baidu.com"
+    "服务器名称 22 220.181.57.217 root passphrase key ~/private_key.pem"
     "新浪服务器 22 66.102.251.33 root sina.com"
 )
 ```
 或者在脚本同目录下新建一个文件server_config,按照以上格式写入文件，每个配置单独一行如下：
 ```
-服务器名称 22 220.181.57.217 root baidu.com
+服务器名称 22 220.181.57.217 root passphrase key ~/private_key.pem
 新浪服务器 22 66.102.251.33 root sina.com
 ```
 ## 使用
@@ -27,10 +27,10 @@
   chmod u+x ssh_login
   ./ssh_login
 ```
-2).可以将ssh_login 拷贝至 /usr/local ,之后便可以在终端中全局使用ssh_login
+2).可以将ssh_login 软连接到 /usr/local ,之后便可以在终端中全局使用ssh_login
 ```shell
   chmod u+x ssh_login
-  cp ssh_login /usr/local/
+  ln -s ssh_login /usr/local/
   ssh_login
 ```
 3).命令使用
