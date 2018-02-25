@@ -24,15 +24,17 @@
 ## 使用
 1).给ssh_login文件执行的权限,并执行ssh_login
 ```shell
-  chmod u+x ssh_login
+  chmod u+x ssh_login
   ./ssh_login
 ```
 2).可以将ssh_login 软连接到 /usr/local ,之后便可以在终端中全局使用ssh_login
 ```shell
   chmod u+x ssh_login
-  ln -s ssh_login /usr/local/
+  ln -s $PWD/ssh_login /usr/local/
   ssh_login
 ```
+    注意: ln -s 之后的路径都要是完整的路径地址
+
 3).命令使用
 
 `ssh_login list` - 查看所有服务器配置
