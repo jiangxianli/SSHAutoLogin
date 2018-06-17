@@ -4,14 +4,14 @@
 ## 添加配置
 在ssh_login文件中，修改以下配置
 ```shell
-    CONFIGS=(
+CONFIGS=(
     "服务器别名 服务器名称 端口号 IP地址 登录用户名 登录密码/秘钥文件Key 秘钥文件地址"
     "服务器别名 服务器名称 端口号 IP地址 登录用户名 登录密码"
 )
 ```
 比如可以修改成：
 ```shell
-    CONFIGS=(
+CONFIGS=(
     "服务器别名 服务器名称 22 220.181.57.217 root passphrase key ~/private_key.pem"
     "服务器别名 新浪服务器 22 66.102.251.33 root sina.com"
 )
