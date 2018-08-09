@@ -90,10 +90,12 @@ function AutoLogin(){
         echo "正在登录【${CONFIG[1]}】"
     fi
 
+	export PASSWORD=${CONFIG[5]};
+
     command="
         expect {
-                \"*assword\" {set timeout 6000; send \"${CONFIG[5]}\n\"; exp_continue ; sleep 3; }
-                \"*passphrase\" {set timeout 6000; send \"${CONFIG[5]}\r\n\"; exp_continue ; sleep 3; }
+                \"*assword\" {set timeout 6000; send \$env(PASSWORD)\r; exp_continue ; sleep 3; }
+                \"*passphrase\" {set timeout 6000; send \$env(PASSWORD)\n\r; exp_continue ; sleep 3; }
                 \"yes/no\" {send \"yes\n\"; exp_continue;}
                 \"Last*\" {  send_user \"\n成功登录【${CONFIG[1]}】\n\";}
         }
