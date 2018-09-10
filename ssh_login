@@ -35,11 +35,12 @@ fi
 
 #服务器配置菜单
 function ConfigList(){
+    echo "- 序号	IP		别名"
     for ((i=0;i<${CONFIG_LENGTH};i++));
     do
         CONFIG=(${CONFIGS[$i]}) #将一维sites字符串赋值到数组
         serverNum=$(($i+1))
-        echo "---(${serverNum} : ${CONFIG[0]})--${CONFIG[1]}(${CONFIG[3]})---"
+        echo "- [${serverNum}]	${CONFIG[3]}	${CONFIG[0]}"
     done
 }
 
@@ -56,36 +57,46 @@ function LoginMenu(){
 
 #选择登录的服务器
 function ChooseServer(){
-    read serverNum
-    if [[ $serverNum -gt $CONFIG_LENGTH ]] ;
-    then
-        echo "输入的序号或别名不正确，请重新输入:"
-        ChooseServer ;
-        return ;
-    fi
-    if [[ $serverNum -lt 1 ]] ;
-    then
-        echo "输入的序号或别名不正确，请重新输入:"
-        ChooseServer ;
-        return ;
+    read serverNum;
+
+    # 是否重新选择
+    needChooseServer=1;
+
+    if [  -z $serverNum ]; then
+        echo "请输入序号或者别名"
+        reChooseServer $needChooseServer;
     fi
 
-    AutoLogin $serverNum;
+    AutoLogin $serverNum $needChooseServer;
 }
 
-#自动登录
-function AutoLogin(){
+# 是退出还是重新选择Server
+function reChooseServer(){
+    if [ "$1"x = "1"x ]; then
+        ChooseServer;
+    else
+        exit;
+    fi    
+}
 
+## 
+# 自动登录
+# @param $1 序号或者别名
+# @param $2 是否重新选择server
+##
+function AutoLogin(){
     num=$(GetServer $1)
+    
     if [  -z $num ]; then
         echo "您输入的别名【$1】不存在，请重试"
-        exit;
+        reChooseServer $2;
     fi
 
     CONFIG=(${CONFIGS[$num]})
+
     if [  -z $CONFIG ]; then
         echo "您输入的序号【$1】不存在，请重试"
-        exit;
+        reChooseServer $2;
     else
         echo "正在登录【${CONFIG[1]}】"
     fi
@@ -101,19 +112,20 @@ function AutoLogin(){
         }
        interact
     ";
-   pem=${CONFIG[6]}
-   if [ -n "$pem" ] ;then
+    pem=${CONFIG[6]}
+    if [ -n "$pem" ] ;then
     expect -c "
         spawn ssh -p ${CONFIG[2]} -i ${CONFIG[6]} ${CONFIG[4]}@${CONFIG[3]}
         ${command}
     "
-   else
+    else
     expect -c "
         spawn ssh -p ${CONFIG[2]} ${CONFIG[4]}@${CONFIG[3]}
         ${command}
     "
-   fi
+    fi
     echo "您已退出【${CONFIG[1]}】"
+    exit;
 
 }
 
