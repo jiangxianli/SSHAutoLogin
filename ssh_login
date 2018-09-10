@@ -33,7 +33,16 @@ then
     exit ;
 fi
 
-#服务器配置菜单
+##
+# 绿色输出
+##
+function GreenEcho() {
+    echo -e "\033[32m ${1} \033[0m";
+}
+
+##
+# 服务器配置菜单
+##
 function ConfigList(){
     echo "- 序号	IP		别名"
     for ((i=0;i<${CONFIG_LENGTH};i++));
@@ -44,7 +53,9 @@ function ConfigList(){
     done
 }
 
-#登录菜单
+##
+# 登录菜单
+##
 function LoginMenu(){
     if [  ! -n $1 ]; then
         AutoLogin $1
@@ -55,7 +66,9 @@ function LoginMenu(){
     fi
 }
 
-#选择登录的服务器
+##
+# 选择登录的服务器
+##
 function ChooseServer(){
     read serverNum;
 
@@ -70,7 +83,10 @@ function ChooseServer(){
     AutoLogin $serverNum $needChooseServer;
 }
 
+##
 # 是退出还是重新选择Server
+# @param $1 是否重新选择server 1: 重新选择server
+##
 function reChooseServer(){
     if [ "$1"x = "1"x ]; then
         ChooseServer;
@@ -82,7 +98,7 @@ function reChooseServer(){
 ## 
 # 自动登录
 # @param $1 序号或者别名
-# @param $2 是否重新选择server
+# @param $2 是否重新选择server 1: 重新选择server
 ##
 function AutoLogin(){
     num=$(GetServer $1)
@@ -124,12 +140,14 @@ function AutoLogin(){
         ${command}
     "
     fi
-    echo "您已退出【${CONFIG[1]}】"
+    GreenEcho "您已退出【${CONFIG[1]}】"
     exit;
 
 }
 
+## 
 # 通过输入定位选择那个服务器配置
+##
 function GetServer(){
     # 判断输入是否为数字
     if [ "$1" -gt 0 ] 2>/dev/null ;then
@@ -145,7 +163,9 @@ function GetServer(){
     fi
 }
 
+##
 # 程序入口
+##
 if [ 1 == $# ]; then
     if [ 'list' == $1 ]; then
         ConfigList
