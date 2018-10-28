@@ -30,7 +30,7 @@ CONFIGS=(
 2).可以将ssh_login 软连接到 /usr/local ,之后便可以在终端中全局使用ssh_login
 ```shell
   chmod u+x ssh_login
-  ln -s $PWD/ssh_login /usr/local/
+  ln -s $PWD/ssh_login /usr/local/bin/
   ssh_login
 ```
     注意: ln -s 之后的路径都要是完整的路径地址
