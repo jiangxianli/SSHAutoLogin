@@ -24,7 +24,7 @@ if [ -f ${CONFIG_PATH} ]; then
     while read line
     do
         # 注释行或空行 跳过
-        if [[ ${LINE:0:1} == "#" || $LINE =~ ^$ ]]; then
+        if [[ ${line:0:1} == "#" || $line =~ ^$ ]]; then
             continue
         else
             CONFIGS+=("$line")
