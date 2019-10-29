@@ -69,7 +69,7 @@ function GreenEcho() {
 ##
 function ConfigList(){
     CheckConfig
-    echo -e "- 序号\t\t别名\t\tIP\t\t端口\\t登录用户"
+    echo -e "- 序号\t\t别名\t\tIP\t\t端口\t\t登录用户"
     for ((i=0;i<${CONFIG_LENGTH};i++));
     do
         CONFIG=(${CONFIGS[$i]}) #将一维sites字符串赋值到数组
