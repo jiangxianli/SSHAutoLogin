@@ -14,6 +14,9 @@ CONFIGS=()
 BaseDir="/etc/ssh_login"
 #配置文件目录
 CONFIG_PATH="$BaseDir/host.ini"
+#配置文件下载地址
+#iniUrl="https://raw.githubusercontent.com/jiangxianli/SSHAutoLogin/master/host.ini"
+iniUrl="https://www.jiangxianli.com/SSHAutoLogin/host.ini"
 
 # 读取配置文件
 if [ -f ${CONFIG_PATH} ]; then
@@ -209,7 +212,7 @@ EditConfig()
 {
     CheckDir
     if [ ! -f "$CONFIG_PATH" ]; then
-      curl -ko $CONFIG_PATH --connect-timeout 300 --retry 5 --retry-delay 3 "https://raw.githubusercontent.com/jiangxianli/SSHAutoLogin/master/host.ini"
+      curl -s -ko  $CONFIG_PATH --connect-timeout 300 --retry 5 --retry-delay 3 $iniUrl
     fi
     vi $CONFIG_PATH
 }

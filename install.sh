@@ -3,6 +3,14 @@
 #基础目录
 BaseDir="/etc/ssh_login"
 
+#配置文件下载地址
+#iniUrl="https://raw.githubusercontent.com/jiangxianli/SSHAutoLogin/master/host.ini"
+iniUrl="https://www.jiangxianli.com/SSHAutoLogin/host.ini"
+
+#可执行文件下载地址
+#exeUrl="https://raw.githubusercontent.com/jiangxianli/SSHAutoLogin/master/ssh_login.sh"
+exeUrl="https://www.jiangxianli.com/SSHAutoLogin/ssh_login.sh"
+
 ##
 # 检查基础目录是否存在
 ##
@@ -31,11 +39,11 @@ CheckDir
 cd $BaseDir
 
 #写入配置文件
-curl -ko  $BaseDir/host.ini --connect-timeout 300 --retry 5 --retry-delay 3 "https://raw.githubusercontent.com/jiangxianli/SSHAutoLogin/master/host.ini"
+curl -ko  $BaseDir/host.ini --connect-timeout 300 --retry 5 --retry-delay 3 $iniUrl
 echo -e "写入配置文件host.ini到$BaseDir/host.ini ......\n"
 
 #写入可执行文件
-curl -ko  $BaseDir/ssh_login --connect-timeout 300 --retry 5 --retry-delay 3 "https://raw.githubusercontent.com/jiangxianli/SSHAutoLogin/master/ssh_login.sh"
+curl -ko  $BaseDir/ssh_login --connect-timeout 300 --retry 5 --retry-delay 3 $exeUrl
 chmod u+x $BaseDir/ssh_login
 echo -e "写入可执行文件ssh_login到$BaseDir/ssh_login ......\n"
 
